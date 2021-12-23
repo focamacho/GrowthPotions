@@ -19,7 +19,7 @@ group = 'com.samuelp88'
 version = '1.0-SNAPSHOT'
 
 java {
-    archivesBaseName = 'growth'
+    archivesBaseName = 'GrowthPotions-1.17.1'
     toolchain.languageVersion = JavaLanguageVersion.of(16)
 }
 
