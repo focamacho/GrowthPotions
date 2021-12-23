@@ -31,7 +31,6 @@ public class GrowthPotionItem extends Item {
         this.setRegistryName(name);
     }
 
-
     protected GrowthPotionEntity createEntityInstance(Level worldIn, LivingEntity entityIn) {
         return new GrowthPotionEntity(worldIn, entityIn);
     }
