@@ -1,5 +1,6 @@
 package com.samuelp88.growth.items;
 
+import com.samuelp88.growth.config.GrowthConfig;
 import com.samuelp88.growth.entities.GrowthPotionEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
@@ -26,6 +27,8 @@ public class StrongGrowthPotionItem extends GrowthPotionItem {
 
     @Override
     public void applyEffect(Level level, Block block, BlockPos blockPos, BlockState blockState) {
+        if((block instanceof BonemealableBlock bonemealableBlock) && (!bonemealableBlock.isBonemealSuccess(level, level.random, blockPos, blockState) && !GrowthConfig.ignoreBonemealableStrong.get())) return;
+
         if(block instanceof CropBlock) {
             level.setBlock(blockPos, blockState.setValue(CropBlock.AGE, 7), 2);
         } else if(block instanceof SaplingBlock saplingBlock) {

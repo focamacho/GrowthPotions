@@ -1,5 +1,6 @@
 package com.samuelp88.growth.items;
 
+import com.samuelp88.growth.config.GrowthConfig;
 import com.samuelp88.growth.entities.GrowthPotionEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
@@ -64,6 +65,7 @@ public class GrowthPotionItem extends Item {
 
     public void applyEffect(Level level, Block block, BlockPos blockPos, BlockState blockState) {
         if((block instanceof BonemealableBlock growableBlock) && !(block instanceof GrassBlock)) {
+            if(!growableBlock.isBonemealSuccess(level, level.random, blockPos, blockState) && !GrowthConfig.ignoreBonemealable.get()) return;
             growableBlock.performBonemeal((ServerLevel) level, new Random(), blockPos, blockState);
         }
     }

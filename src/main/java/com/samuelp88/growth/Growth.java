@@ -1,5 +1,6 @@
 package com.samuelp88.growth;
 
+import com.samuelp88.growth.config.GrowthConfig;
 import com.samuelp88.growth.dispenser.GrowthPotionDispenseBehavior;
 import com.samuelp88.growth.handlers.RegistryHandler;
 import com.samuelp88.growth.holder.ItemHolder;
@@ -11,7 +12,9 @@ import net.minecraft.world.level.block.DispenserBlock;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.ParallelDispatchEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -29,6 +32,8 @@ public class Growth {
     };
 
     public Growth() {
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, GrowthConfig.CONFIG_SPEC);
+
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doLaterStuff);
     }
