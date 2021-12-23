@@ -6,15 +6,15 @@ import com.samuelp88.growth.items.GrowthPotionItem;
 import com.samuelp88.growth.items.StrongGrowthPotionItem;
 import com.samuelp88.growth.entities.GrowthPotionEntity;
 import com.samuelp88.growth.holder.ItemHolder;
-import net.minecraft.entity.EntityClassification;
-import net.minecraft.entity.EntityType;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.potion.PotionUtils;
-import net.minecraft.potion.Potions;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.entity.MobCategory;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.alchemy.PotionUtils;
+import net.minecraft.world.item.alchemy.Potions;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.brewing.BrewingRecipe;
 import net.minecraftforge.common.brewing.BrewingRecipeRegistry;
 import net.minecraftforge.event.RegistryEvent;
@@ -26,7 +26,7 @@ import net.minecraftforge.registries.IForgeRegistry;
 @Mod.EventBusSubscriber(modid = Growth.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class RegistryHandler {
 
-    public static EntityType<GrowthPotionEntity> growthPotionEntity = EntityType.Builder.<GrowthPotionEntity>of(GrowthPotionEntity::new, EntityClassification.MISC)
+    public static EntityType<GrowthPotionEntity> growthPotionEntity = EntityType.Builder.<GrowthPotionEntity>of(GrowthPotionEntity::new, MobCategory.MISC)
             .sized(1.0f, 1.0f)
             .build(new ResourceLocation(Growth.MODID, "growthentity").toString());
 

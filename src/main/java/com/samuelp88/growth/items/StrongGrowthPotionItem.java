@@ -1,8 +1,10 @@
 package com.samuelp88.growth.items;
 
 import com.samuelp88.growth.entities.GrowthPotionEntity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.world.World;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.level.Level;
+
+import net.minecraft.world.item.Item.Properties;
 
 public class StrongGrowthPotionItem extends GrowthPotionItem {
 
@@ -13,7 +15,7 @@ public class StrongGrowthPotionItem extends GrowthPotionItem {
     }
 
     @Override
-    protected GrowthPotionEntity createEntityInstance(World worldIn, LivingEntity entityIn) {
+    protected GrowthPotionEntity createEntityInstance(Level worldIn, LivingEntity entityIn) {
         return new GrowthPotionEntity(worldIn, entityIn);
     }
 

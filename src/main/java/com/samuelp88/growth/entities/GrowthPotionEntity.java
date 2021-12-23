@@ -3,33 +3,33 @@ package com.samuelp88.growth.entities;
 import com.samuelp88.growth.holder.ItemHolder;
 import com.samuelp88.growth.utils.GrowthPotionEffects;
 import com.samuelp88.growth.utils.GrowthPotionUtils;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.block.GrassBlock;
 import net.minecraft.block.IGrowable;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.projectile.PotionEntity;
-import net.minecraft.item.Item;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.projectile.ThrownPotion;
+import net.minecraft.world.item.Item;
 import net.minecraft.potion.Effects;
-import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.world.World;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.phys.HitResult;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.server.ServerWorld;
 
 import java.util.Random;
 import java.util.stream.Stream;
 
-public class GrowthPotionEntity extends PotionEntity {
+public class GrowthPotionEntity extends ThrownPotion {
 
     private GrowthPotionEffects growthEffect;
 
-    public GrowthPotionEntity(World worldIn, LivingEntity livingEntityIn) {
+    public GrowthPotionEntity(Level worldIn, LivingEntity livingEntityIn) {
         super(worldIn, livingEntityIn);
     }
 
-    public GrowthPotionEntity(EntityType<GrowthPotionEntity> growthPotionEntityEntityType, World world) {
+    public GrowthPotionEntity(EntityType<GrowthPotionEntity> growthPotionEntityEntityType, Level world) {
         super(growthPotionEntityEntityType, world);
     }
 
@@ -56,10 +56,10 @@ public class GrowthPotionEntity extends PotionEntity {
     }
 
     @Override
-    protected void onHit(RayTraceResult pResult) {
+    protected void onHit(HitResult pResult) {
         if(!this.level.isClientSide) {
             getEffectByItem();
-            AxisAlignedBB axisalignedbb = this.getBoundingBox().inflate(4.0D, 2.0D, 4.0D);
+            AABB axisalignedbb = this.getBoundingBox().inflate(4.0D, 2.0D, 4.0D);
             Stream<BlockPos> blockPosStream = BlockPos.betweenClosedStream(axisalignedbb);
             this.level.levelEvent(2007, this.blockPosition(), 3593824);
             blockPosStream.forEach((BlockPos blockPosition) -> {

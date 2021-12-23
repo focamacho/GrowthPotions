@@ -4,19 +4,19 @@ import com.samuelp88.growth.entities.GrowthPotionEntity;
 import com.samuelp88.growth.handlers.RegistryHandler;
 import com.samuelp88.growth.holder.ItemHolder;
 import net.minecraft.block.Block;
-import net.minecraft.block.DispenserBlock;
-import net.minecraft.dispenser.IBlockSource;
-import net.minecraft.dispenser.IDispenseItemBehavior;
-import net.minecraft.dispenser.IPosition;
-import net.minecraft.dispenser.ProjectileDispenseBehavior;
+import net.minecraft.world.level.block.DispenserBlock;
+import net.minecraft.core.BlockSource;
+import net.minecraft.core.dispenser.DispenseItemBehavior;
+import net.minecraft.core.Position;
+import net.minecraft.core.dispenser.AbstractProjectileDispenseBehavior;
 import net.minecraft.entity.ai.attributes.GlobalEntityTypeAttributes;
 import net.minecraft.entity.projectile.PotionEntity;
-import net.minecraft.entity.projectile.ProjectileEntity;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.Util;
-import net.minecraft.world.World;
+import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.Util;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -38,7 +38,7 @@ public class Growth {
 
     // Directly reference a log4j logger.
     public static final String MODID = "growth";
-    public static final ItemGroup CREATIVETAB = new ItemGroup(MODID) {
+    public static final CreativeModeTab CREATIVETAB = new CreativeModeTab(MODID) {
         @Override
         public ItemStack makeIcon() {
             return new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("growth:growth_potion")));
@@ -64,13 +64,13 @@ public class Growth {
         // some preinit code
         RegistryHandler.registerBrewings();
         DeferredWorkQueue.runLater(() -> {
-            DispenserBlock.registerBehavior(ItemHolder.GROWTH_POTION_ITEM, new IDispenseItemBehavior() {
-                public ItemStack dispense(IBlockSource p_dispense_1_, ItemStack p_dispense_2_) {
-                    return (new ProjectileDispenseBehavior() {
+            DispenserBlock.registerBehavior(ItemHolder.GROWTH_POTION_ITEM, new DispenseItemBehavior() {
+                public ItemStack dispense(BlockSource p_dispense_1_, ItemStack p_dispense_2_) {
+                    return (new AbstractProjectileDispenseBehavior() {
                         /**
                          * Return the projectile entity spawned by this dispense behavior.
                          */
-                        protected ProjectileEntity getProjectile(World pLevel, IPosition pPosition, ItemStack pStack) {
+                        protected Projectile getProjectile(Level pLevel, Position pPosition, ItemStack pStack) {
                             return Util.make(new GrowthPotionEntity(pLevel, pPosition.x(), pPosition.y(), pPosition.z()), (p_218411_1_) -> {
                                 p_218411_1_.setItem(pStack);
                             });
