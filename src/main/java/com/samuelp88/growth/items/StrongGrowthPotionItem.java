@@ -4,8 +4,6 @@ import com.samuelp88.growth.entities.GrowthPotionEntity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 
-import net.minecraft.world.item.Item.Properties;
-
 public class StrongGrowthPotionItem extends GrowthPotionItem {
 
     public static String registryName = "strong_growth_potion";

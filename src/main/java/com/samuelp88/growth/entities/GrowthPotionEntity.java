@@ -1,36 +1,37 @@
 package com.samuelp88.growth.entities;
 
+import com.samuelp88.growth.handlers.RegistryHandler;
 import com.samuelp88.growth.holder.ItemHolder;
 import com.samuelp88.growth.utils.GrowthPotionEffects;
 import com.samuelp88.growth.utils.GrowthPotionUtils;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.block.GrassBlock;
-import net.minecraft.block.IGrowable;
+import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
 import net.minecraft.world.entity.projectile.ThrownPotion;
 import net.minecraft.world.item.Item;
-import net.minecraft.potion.Effects;
-import net.minecraft.world.phys.AABB;
-import net.minecraft.core.BlockPos;
-import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.server.ServerWorld;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.HitResult;
 
-import java.util.Random;
 import java.util.stream.Stream;
 
-public class GrowthPotionEntity extends ThrownPotion {
+public class GrowthPotionEntity extends ThrowableItemProjectile {
 
     private GrowthPotionEffects growthEffect;
 
     public GrowthPotionEntity(Level worldIn, LivingEntity livingEntityIn) {
-        super(worldIn, livingEntityIn);
+        super(RegistryHandler.growthPotionEntity, livingEntityIn, worldIn);
     }
 
     public GrowthPotionEntity(EntityType<GrowthPotionEntity> growthPotionEntityEntityType, Level world) {
         super(growthPotionEntityEntityType, world);
+    }
+
+    public GrowthPotionEntity(Level worldIn, double x, double y, double z) {
+        super(RegistryHandler.growthPotionEntity, x, y, z, worldIn);
     }
 
     protected void getEffectByItem() {
@@ -70,6 +71,12 @@ public class GrowthPotionEntity extends ThrownPotion {
             });
 
         }
-        this.remove();
+        this.discard();
     }
+
+    @Override
+    protected Item getDefaultItem() {
+        return ItemHolder.GROWTH_POTION_ITEM;
+    }
+
 }

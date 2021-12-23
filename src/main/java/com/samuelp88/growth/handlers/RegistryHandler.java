@@ -1,20 +1,20 @@
 package com.samuelp88.growth.handlers;
 
-import com.samuelp88.growth.brewrecipes.GrowthBrewRecipe;
 import com.samuelp88.growth.Growth;
-import com.samuelp88.growth.items.GrowthPotionItem;
-import com.samuelp88.growth.items.StrongGrowthPotionItem;
+import com.samuelp88.growth.brewrecipes.GrowthBrewRecipe;
 import com.samuelp88.growth.entities.GrowthPotionEntity;
 import com.samuelp88.growth.holder.ItemHolder;
-import net.minecraft.world.entity.MobCategory;
+import com.samuelp88.growth.items.GrowthPotionItem;
+import com.samuelp88.growth.items.StrongGrowthPotionItem;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.item.alchemy.Potions;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.common.brewing.BrewingRecipe;
 import net.minecraftforge.common.brewing.BrewingRecipeRegistry;
 import net.minecraftforge.event.RegistryEvent;
