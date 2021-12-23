@@ -10,13 +10,13 @@ import net.minecraftforge.common.brewing.BrewingRecipe;
 import javax.annotation.Nonnull;
 
 public class GrowthBrewRecipe extends BrewingRecipe {
+
     public GrowthBrewRecipe(Ingredient input, Ingredient ingredient, ItemStack output) {
         super(input, ingredient, output);
     }
 
     @Override
-    public boolean isInput(@Nonnull ItemStack stack)
-    {
+    public boolean isInput(@Nonnull ItemStack stack) {
         ItemStack potion = PotionUtils.setPotion(new ItemStack(Items.SPLASH_POTION), Potions.WATER);
         return ItemStack.tagMatches(stack, potion);
     }
